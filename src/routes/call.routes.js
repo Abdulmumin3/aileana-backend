@@ -1,29 +1,36 @@
 import express from "express";
-import Call from "../models/Call.js";
 import auth from "../middleware/auth.middleware.js";
+import { calls, generateId } from "../data/store.js";
 
 const router = express.Router();
 
-router.post("/start", auth, async (req, res) => {
-  const call = await Call.create({
+router.post("/start", auth, (req, res) => {
+  const call = {
+    id: generateId(),
     userId: req.user.id,
     status: "started",
-    startedAt: new Date()
-  });
+    startedAt: new Date(),
+    endedAt: null
+  };
+
+  calls.push(call);
   res.json(call);
 });
 
-router.post("/end/:id", auth, async (req, res) => {
-  const call = await Call.findById(req.params.id);
+router.post("/end/:id", auth, (req, res) => {
+  const call = calls.find(c => c.id === req.params.id);
+  if (!call) {
+    return res.status(404).json({ message: "Call not found" });
+  }
+
   call.status = "ended";
   call.endedAt = new Date();
-  await call.save();
   res.json(call);
 });
 
-router.get("/", auth, async (req, res) => {
-  const calls = await Call.find({ userId: req.user.id });
-  res.json(calls);
+router.get("/", auth, (req, res) => {
+  const userCalls = calls.filter(c => c.userId === req.user.id);
+  res.json(userCalls);
 });
 
 export default router;
