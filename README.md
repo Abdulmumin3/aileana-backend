@@ -14,7 +14,7 @@ Payments and calls are mocked to focus on architecture, API design, and security
 Setup Instructions
 
 ```
-git clone <repo-url>
+git clone https://github.com/Abdulmumin3/aileana-backend
 cd aileana-backend
 npm install
 npm run dev
@@ -23,21 +23,21 @@ npm run dev
 API Endpoints
 
 Auth
-| Method | Endpoint           | Description     |
+| Method | Endpoint | Description |
 | ------ | ------------------ | --------------- |
-| POST   | /api/auth/register | Register user   |
-| POST   | /api/auth/login    | Login & get JWT |
+| POST | /api/auth/register | Register user |
+| POST | /api/auth/login | Login & get JWT |
 
 Wallet
-| Method | Endpoint            | Description               |
+| Method | Endpoint | Description |
 | ------ | ------------------- | ------------------------- |
-| GET    | /api/wallet         | Get wallet balance        |
-| POST   | /api/wallet/fund    | Initiate wallet funding   |
-| POST   | /api/wallet/webhook | Mock payment confirmation |
+| GET | /api/wallet | Get wallet balance |
+| POST | /api/wallet/fund | Initiate wallet funding |
+| POST | /api/wallet/webhook | Mock payment confirmation |
 
 Calls
-| Method | Endpoint           | Description  |
+| Method | Endpoint | Description |
 | ------ | ------------------ | ------------ |
-| POST   | /api/calls/start   | Start a call |
-| POST   | /api/calls/end/:id | End a call   |
-| GET    | /api/calls         | Call history |
+| POST | /api/calls/start | Start a call |
+| POST | /api/calls/end/:id | End a call |
+| GET | /api/calls | Call history |
